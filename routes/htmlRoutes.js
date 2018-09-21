@@ -5,15 +5,24 @@ var path = require("path");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 //
 module.exports = function (app) {
-  //
   app.get("/", function (req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/index");
     }
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
-  //
+
+  // //This is the thing I just Commented but it´s working
+  // app.get("/", function (req, res) {
+  //   // If the user already has an account send them to the members page
+  //   if (req.user) {
+  //     res.redirect("/members");
+  //   }
+  //   res.sendFile(path.join(__dirname, "../public/signup.html"));
+  // });
+  // //
+
   app.get("/login", function (req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {

@@ -5,9 +5,9 @@ $(document).ready(function () {
     var passwordInput = $("input#password-input");
     var userBioInput = $("textarea#bio-input");
 
-    // When the signup button is clicked, we validate the email and passwordInput are not blank
+    //When the signup button is clicked, we validate the email and passwordInput are not blank
     signUpForm.on("submit", function (event) {
-        event.preventDefault();
+
         var userData = {
             userName: userNameInput.val().trim(),
             password: passwordInput.val().trim(),
@@ -32,7 +32,11 @@ $(document).ready(function () {
             password,
             userBio
         }).then(function (data) {
-            window.location.replace(data);
+            //window.location.replace(data);
+
+            $.get("/board").then(function () {
+
+            })
             // If there's an error, handle it by throwing up a boostrap alert
         }).catch(handleLoginErr);
     }

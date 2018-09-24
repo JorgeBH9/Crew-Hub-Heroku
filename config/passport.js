@@ -1,11 +1,10 @@
 //we import passport packages required for authentication
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
-//
-//We will need the models folder to check passport agains
 var db = require("../models");
 
-passport.use(new LocalStrategy(
+//This is to be use with the login
+passport.use("login", new LocalStrategy(
     function (userName, password, done) {
         db.User.findOne({
             where: {
@@ -29,6 +28,24 @@ passport.use(new LocalStrategy(
         });
     }
 ));
+
+// passport.use("signup", new LocalStrategy(
+//     function (req, username, password, done) {
+//         console.log(req.body);
+//         db.User.create({
+//             username,
+//             password,
+//             userBio: ""
+//         }).then(function (user) {
+//             return done(null, user);
+//             // res.redirect("/");
+//         }).catch(function (err) {
+//             console.log(err);
+//             return done(null, false, req.flash("message", "Something went wrong"));
+//         });
+//         //res.status(422).json(err.errors[0].message);
+//     }
+// ));
 //
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
@@ -40,6 +57,7 @@ passport.serializeUser(function (user, cb) {
 passport.deserializeUser(function (obj, cb) {
     cb(null, obj);
 });
+
 //
 // Exporting our configured passport
 module.exports = passport;

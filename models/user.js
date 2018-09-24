@@ -25,6 +25,12 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
+    User.associate = function (models) {
+        User.hasMany(models.Post, {
+            onDelete: "cascade"
+        });
+    };
+
 
     // Creating a custom method for our User model. 
 
